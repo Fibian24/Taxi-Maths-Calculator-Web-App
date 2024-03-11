@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Maths</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="logo">
+        Taxi Maths
+    </div>
+<div class="calculator">
+    <div class="inputs">
+        <h2>Inputs</h2>
+        <form action="inputs" method="post">
+            <div class="inpDiv">
+                <label for="numberOfSeats">
+                    Number of seats
+                </label>
+                <input type="text" id="seats" required>
+            </div>
+
+            <div class="inpDiv">
+                <label for="price">
+                    Price
+                </label>
+                <input type="text" id="price" required>
+            </div>
+
+            <div class="inpDiv">
+                <label for="amountReceived">Amount received</label>
+                <input type="text" id="amount" required>
+            </div>
+
+            <div class="inpDiv">
+                <label for="numberOfPeopleInARow">Number of people in a row</label>
+                <input type="text" id="peopInRow" required>
+            </div>
+            <button type="submit">calculate</button>
+        </form>
+    </div>
+    <div class="outputs">
+        <h2>Outputs</h2>
+        <div class="outputDiv" id="total"></div>
+        <div class="outputDiv" id="change"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        console.log("Document is ready");
+
+        $('form').submit(function(event) {
+            event.preventDefault();
+
+            console.log("Form submitted");
+
+            var seats = $('#seats').val();
+            var price = $('#price').val();
+            var amount = $('#amount').val();
+            var peopInRow = $('#peopInRow').val();
+
+            console.log("Seats: " + seats);
+            console.log("Price: " + price);
+            console.log("Amount: " + amount);
+            console.log("People in Row: " + peopInRow);
+
+            var totalAmount = Number(seats) * Number(price);
+            var changeAmount = Number(amount) - (Number(price) * Number(peopInRow));
+
+            console.log("Change: " + changeAmount);
+            if (changeAmount <= 0) {
+                $('#change').html('Amount received is short by ' + Math.abs(changeAmount));
+            } else {
+                $('#change').html('Change: ' + changeAmount.toFixed(2));
+            }
+            console.log("Total: " + totalAmount);
+            $("#total").html('Total: ' + totalAmount.toFixed(2));
+        });
+    });
+
+
+</script>
+</body>
+</html>
